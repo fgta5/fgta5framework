@@ -298,6 +298,18 @@ async function runSetup() {
 		await fs.writeFile(path.join(rootDir, '.env'), envContent, 'utf-8');
 		console.log('✅ File .env berhasil dibuat dan diupdate.');
 
+		// Mengganti {nama project} di login.html dengan nama project yang sebenarnya
+		try {
+			console.log('✍️  Mengupdate nama project di login.html...');
+			const loginHtmlPath = path.join(rootDir, 'public', 'modules', 'login', 'login.html');
+			let loginHtmlContent = await fs.readFile(loginHtmlPath, 'utf-8');
+			loginHtmlContent = loginHtmlContent.replace(/{nama project}/g, projectName);
+			await fs.writeFile(loginHtmlPath, loginHtmlContent, 'utf-8');
+			console.log('✅ File login.html berhasil diupdate.');
+		} catch (e) {
+			console.warn('⚠️ Gagal mengupdate login.html:', e.message);
+		}
+
 		// Pastikan Database target ada
 		await createDatabaseIfNotExists(dbConfig, dbname);
 

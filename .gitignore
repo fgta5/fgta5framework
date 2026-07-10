@@ -140,13 +140,10 @@ vite.config.ts.timestamp-*
 
 
 
-# custom css untuk keperluan theme
-public/application.css
-public/icons/icon-logo-*
 public/modules/--*
 
 
-public/local
+
 
 production.config.js
 
