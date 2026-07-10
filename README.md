@@ -7,7 +7,7 @@ Basic setup untuk fgta5framework.
 `degit` adalah alat yang mempermudah penyalinan repositori Git tanpa menyertakan riwayat git lama (git history). Ini sangat cocok digunakan untuk menginisialisasi proyek baru berdasarkan template ini.
 
 ### Prasyarat
-Pastikan Anda sudah menginstal [Node.js](https://nodejs.org/).
+Pastikan Anda sudah menginstal [Node.js](https://nodejs.org/) (Minimal versi 22).
 
 ### Cara Penggunaan
 
