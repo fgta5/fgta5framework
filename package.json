@@ -1,5 +1,5 @@
 {
-  "name": "@fgta5framework",
+  "name": "@fgta5/fgta5framework",
   "version": "0.1.0",
   "description": "server for jfxpos",
   "type": "module",
