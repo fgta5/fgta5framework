@@ -42,7 +42,7 @@ ON CONFLICT ("setting_id") DO NOTHING;
 -- Sample data: "core"."apps"  (1 row) — from DB
 -- ────────────────────────────────────────────────────────────
 INSERT INTO "core"."apps" ("apps_id", "apps_name", "apps_url", "apps_descr", "apps_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "apps_directory")
-VALUES ('accounting', 'Accounting Apps', 'https://act-dev.transfashion.id', 'port 3003 accounting', FALSE, 240100000, '2025-09-11T06:04:10.197Z', NULL, NULL, '/home/ubuntu/Development/metroindonesia/accounting')
+VALUES ('accounting', 'Accounting Apps', 'https://act-dev.transfashion.id', 'your apps descr', FALSE, 240100000, '2025-09-11T06:04:10.197Z', NULL, NULL, '/home/ubuntu/Development/metroindonesia/accounting')
 ON CONFLICT ("apps_id") DO NOTHING;
 
 -- ────────────────────────────────────────────────────────────
@@ -59,7 +59,7 @@ INSERT INTO "core"."user" ("user_id", "user_name", "user_nickname", "user_fullna
 VALUES (230100000, 'SYSTEM', 'SYSTEM', 'SYSTEM', '', '$2b$10$jnzOyIDTQF4VdZymZGJys.0N2u2g3X1XJiLRvdS/CD2I1vPA8hqNe', FALSE, FALSE, FALSE, FALSE, 230100000, '2025-11-03T08:13:34.462Z', NULL, NULL)
 ON CONFLICT ("user_id") DO NOTHING;
 INSERT INTO "core"."user" ("user_id", "user_name", "user_nickname", "user_fullname", "user_email", "user_password", "user_isdisabled", "user_isdev", "user_isallowallprogram", "user_isshowallprogram", "_createby", "_createdate", "_modifyby", "_modifydate")
-VALUES (240100000, 'agung', 'agung', 'Agung Nugroho', 'agung@email.com', '$2b$10$WhcTZsL0WQpmehEnVSK47un5qNgUXfxCcFt3VCu2V2PtOFzEOV5a6', FALSE, TRUE, TRUE, FALSE, 230100000, '2025-11-03T08:13:41.055Z', 240100000, '2026-06-27T00:05:32.709Z')
+VALUES (240100000, 'agung', 'agung', 'Agung Nugroho', 'your@email.com', '$2b$10$WhcTZsL0WQpmehEnVSK47un5qNgUXfxCcFt3VCu2V2PtOFzEOV5a6', FALSE, TRUE, TRUE, TRUE, 230100000, '2025-11-03T08:13:41.055Z', 240100000, '2026-06-27T00:05:32.709Z')
 ON CONFLICT ("user_id") DO UPDATE SET user_password = EXCLUDED.user_password, user_email = EXCLUDED.user_email, user_isdev = EXCLUDED.user_isdev, user_isallowallprogram = EXCLUDED.user_isallowallprogram;
 
 -- ────────────────────────────────────────────────────────────
@@ -83,32 +83,32 @@ ON CONFLICT ("programgroup_id") DO NOTHING;
 -- Sample data: "core"."program"  (10 rows) — from DB
 -- ────────────────────────────────────────────────────────────
 INSERT INTO "core"."program" ("program_id", "program_title", "apps_id", "program_name", "program_variance", "programgroup_id", "program_descr", "program_icon", "program_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "generator_id")
-VALUES (260000002, 'Program Group', 'accounting', 'programgroup', NULL, 100, 'grouping program, untuk mengelompokkan program-program dalam hierarki', 'public/modules/programgroup/programgroup.svg', FALSE, 240100000, '2026-01-31T21:43:32.944Z', 1, '2026-06-23T03:29:39.434Z', NULL)
+VALUES (250000002, 'Program Group', 'accounting', 'programgroup', NULL, 100, 'grouping program, untuk mengelompokkan program-program dalam hierarki', 'public/modules/programgroup/programgroup.svg', FALSE, 240100000, '2026-01-31T21:43:32.944Z', 1, '2026-06-23T03:29:39.434Z', NULL)
 ON CONFLICT ("program_id") DO NOTHING;
 INSERT INTO "core"."program" ("program_id", "program_title", "apps_id", "program_name", "program_variance", "programgroup_id", "program_descr", "program_icon", "program_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "generator_id")
-VALUES (260100001, 'Document', 'accounting', 'doc', NULL, 100, 'data document', 'public/modules/doc/doc.svg', FALSE, 240100000, '2026-02-01T01:57:45.709Z', 1, '2026-06-23T03:28:55.132Z', NULL)
+VALUES (250100001, 'Document', 'accounting', 'doc', NULL, 100, 'data document', 'public/modules/doc/doc.svg', FALSE, 240100000, '2026-02-01T01:57:45.709Z', 1, '2026-06-23T03:28:55.132Z', NULL)
 ON CONFLICT ("program_id") DO NOTHING;
 INSERT INTO "core"."program" ("program_id", "program_title", "apps_id", "program_name", "program_variance", "programgroup_id", "program_descr", "program_icon", "program_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "generator_id")
-VALUES (260100002, 'Program', 'accounting', 'program', NULL, 100, 'daftar program', 'public/modules/program/program.svg', FALSE, 240100000, '2026-02-01T02:57:54.698Z', 1, '2026-06-24T06:21:00.782Z', NULL)
+VALUES (250100002, 'Program', 'accounting', 'program', NULL, 100, 'daftar program', 'public/modules/program/program.svg', FALSE, 240100000, '2026-02-01T02:57:54.698Z', 1, '2026-06-24T06:21:00.782Z', NULL)
 ON CONFLICT ("program_id") DO NOTHING;
 INSERT INTO "core"."program" ("program_id", "program_title", "apps_id", "program_name", "program_variance", "programgroup_id", "program_descr", "program_icon", "program_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "generator_id")
-VALUES (260100003, 'Application', 'accounting', 'apps', NULL, 100, 'daftar applikasi', 'public/modules/apps/apps.svg', TRUE, 240100000, '2026-02-01T03:51:05.115Z', 1, '2026-06-23T03:28:37.889Z', NULL)
+VALUES (250100003, 'Application', 'accounting', 'apps', NULL, 100, 'daftar applikasi', 'public/modules/apps/apps.svg', TRUE, 240100000, '2026-02-01T03:51:05.115Z', 1, '2026-06-23T03:28:37.889Z', NULL)
 ON CONFLICT ("program_id") DO NOTHING;
 INSERT INTO "core"."program" ("program_id", "program_title", "apps_id", "program_name", "program_variance", "programgroup_id", "program_descr", "program_icon", "program_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "generator_id")
-VALUES (260100004, 'Group', 'accounting', 'group', NULL, 100, 'group', 'public/modules/group/group.svg', FALSE, 240100000, '2026-02-01T04:27:09.541Z', 1, '2026-06-24T06:20:28.696Z', NULL)
+VALUES (250100004, 'Group', 'accounting', 'group', NULL, 100, 'group', 'public/modules/group/group.svg', FALSE, 240100000, '2026-02-01T04:27:09.541Z', 1, '2026-06-24T06:20:28.696Z', NULL)
 ON CONFLICT ("program_id") DO NOTHING;
 INSERT INTO "core"."program" ("program_id", "program_title", "apps_id", "program_name", "program_variance", "programgroup_id", "program_descr", "program_icon", "program_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "generator_id")
-VALUES (260100005, 'User', 'accounting', 'user', NULL, 100, 'daftar user', 'public/modules/user/user.svg', FALSE, 240100000, '2026-02-01T04:32:20.387Z', 1, '2026-06-24T06:22:04.698Z', NULL)
+VALUES (250100005, 'User', 'accounting', 'user', NULL, 100, 'daftar user', 'public/modules/user/user.svg', FALSE, 240100000, '2026-02-01T04:32:20.387Z', 1, '2026-06-24T06:22:04.698Z', NULL)
 ON CONFLICT ("program_id") DO NOTHING;
 INSERT INTO "core"."program" ("program_id", "program_title", "apps_id", "program_name", "program_variance", "programgroup_id", "program_descr", "program_icon", "program_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "generator_id")
-VALUES (260100006, 'Interface', 'accounting', 'interface', NULL, 100, '', 'public/modules/interface/interface.svg', FALSE, 240100000, '2026-02-01T09:45:28.733Z', 1, '2026-06-23T03:29:01.995Z', NULL)
+VALUES (250100006, 'Interface', 'accounting', 'interface', NULL, 100, '', 'public/modules/interface/interface.svg', FALSE, 240100000, '2026-02-01T09:45:28.733Z', 1, '2026-06-23T03:29:01.995Z', NULL)
 ON CONFLICT ("program_id") DO NOTHING;
 INSERT INTO "core"."program" ("program_id", "program_title", "apps_id", "program_name", "program_variance", "programgroup_id", "program_descr", "program_icon", "program_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "generator_id")
-VALUES (260100007, 'Setting', 'accounting', 'setting', NULL, 100, 'setting', 'public/modules/setting/setting.svg', FALSE, 1, '2026-02-01T10:10:57.886Z', 1, '2026-06-23T03:29:46.435Z', NULL)
+VALUES (250100007, 'Setting', 'accounting', 'setting', NULL, 100, 'setting', 'public/modules/setting/setting.svg', FALSE, 1, '2026-02-01T10:10:57.886Z', 1, '2026-06-23T03:29:46.435Z', NULL)
 ON CONFLICT ("program_id") DO NOTHING;
 INSERT INTO "core"."program" ("program_id", "program_title", "apps_id", "program_name", "program_variance", "programgroup_id", "program_descr", "program_icon", "program_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "generator_id")
-VALUES (260100008, 'Authorization', 'accounting', 'auth', NULL, 100, '', 'public/modules/auth/auth.svg', FALSE, 240100000, '2026-02-01T11:11:34.099Z', 1, '2026-06-23T03:28:40.233Z', NULL)
+VALUES (250100008, 'Authorization', 'accounting', 'auth', NULL, 100, '', 'public/modules/auth/auth.svg', FALSE, 240100000, '2026-02-01T11:11:34.099Z', 1, '2026-06-23T03:28:40.233Z', NULL)
 ON CONFLICT ("program_id") DO NOTHING;
 INSERT INTO "core"."program" ("program_id", "program_title", "apps_id", "program_name", "program_variance", "programgroup_id", "program_descr", "program_icon", "program_isdisabled", "_createby", "_createdate", "_modifyby", "_modifydate", "generator_id")
-VALUES (260100030, 'Program Generator', 'accounting', 'generator', NULL, 5, 'program generator', 'generator/generator.svg', TRUE, 240100000, '2026-02-13T03:12:05.062Z', 240100000, '2026-06-01T13:45:51.217Z', NULL)
+VALUES (250100030, 'Program Generator', 'accounting', 'generator', NULL, 5, 'program generator', 'generator/generator.svg', TRUE, 240100000, '2026-02-13T03:12:05.062Z', 240100000, '2026-06-01T13:45:51.217Z', NULL)
 ON CONFLICT ("program_id") DO NOTHING;
