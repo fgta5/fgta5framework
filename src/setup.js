@@ -19,6 +19,7 @@ const rootDir = path.join(__dirname, '..');
 const sqlFiles = [
 	path.join(rootDir, 'setupdb', 'core_schema.sql'),
 	path.join(rootDir, 'setupdb', 'log_schema.sql'),
+	path.join(rootDir, 'setupdb', 'public_schema.sql'),
 	path.join(rootDir, 'setupdb', 'core_sample_data.sql')
 ];
 
@@ -65,7 +66,7 @@ function askPassword(query) {
 		stdin.setEncoding('utf-8');
 
 		let password = '';
-		
+
 		const onData = (chunk) => {
 			chunk = chunk.toString();
 			for (let i = 0; i < chunk.length; i++) {
@@ -101,7 +102,7 @@ function askPassword(query) {
 				}
 			}
 		};
-		
+
 		stdin.on('data', onData);
 	});
 }
@@ -265,11 +266,11 @@ async function runSetup() {
 		const workspaceSrcPath = path.join(rootDir, '.code-workspace');
 		const workspaceContent = await fs.readFile(workspaceSrcPath, 'utf-8');
 		const workspaceJson = JSON.parse(workspaceContent);
-		
+
 		if (workspaceJson.folders && workspaceJson.folders.length > 0) {
 			workspaceJson.folders[0].name = projectName;
 		}
-		
+
 		if (workspaceJson.launch && Array.isArray(workspaceJson.launch.configurations)) {
 			for (const config of workspaceJson.launch.configurations) {
 				if (config.url) {
@@ -277,7 +278,7 @@ async function runSetup() {
 				}
 			}
 		}
-		
+
 		const workspaceDestPath = path.join(rootDir, `${projectName}.code-workspace`);
 		await fs.writeFile(workspaceDestPath, JSON.stringify(workspaceJson, null, 2), 'utf-8');
 		console.log(`✅ File ${projectName}.code-workspace berhasil dibuat.`);
