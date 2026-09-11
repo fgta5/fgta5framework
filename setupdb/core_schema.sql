@@ -1156,6 +1156,7 @@ CREATE TABLE IF NOT EXISTS "core"."setting" (
   "setting_id" VARCHAR(30) NOT NULL,
   "setting_value" TEXT,
   "setting_descr" TEXT,
+  "isdisabled" BOOLEAN DEFAULT false NOT NULL,
   "_createby" INTEGER NOT NULL,
   "_createdate" TIMESTAMPTZ DEFAULT now() NOT NULL,
   "_modifyby" INTEGER,

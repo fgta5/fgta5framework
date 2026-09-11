@@ -37,6 +37,11 @@ ON CONFLICT ("setting_id") DO NOTHING;
 INSERT INTO "core"."setting" ("setting_id", "setting_value", "setting_descr", "_createby", "_createdate", "_modifyby", "_modifydate")
 VALUES ('COMPANY_PHONE', 'my company phone', 'nomor telepon perusahaan', 230100000, '2025-11-03T08:13:34.462Z', NULL, NULL)
 ON CONFLICT ("setting_id") DO NOTHING;
+INSERT INTO "core"."setting" ("setting_id", "setting_value", "setting_descr", "_createby", "_createdate", "_modifyby", "_modifydate")
+VALUES ('ICON_MENU_URL', '/public/local/logo-32x32.svg', 'icon menu pada pojok kanan atas', 230100000, '2025-11-03T08:13:34.462Z', NULL, NULL)
+ON CONFLICT ("setting_id") DO NOTHING;
+
+
 
 -- ────────────────────────────────────────────────────────────
 -- Sample data: "core"."apps"  (1 row) — from DB
