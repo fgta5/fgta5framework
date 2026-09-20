@@ -133,10 +133,6 @@ comment on column core."role"._modifydate is 'waktu terakhir record dimodifikasi
 
 
 
--- =============================================
--- FOREIGN KEY CONSTRAINT
--- =============================================
--- Add Foreign Key Constraint  	
 
 
 -- =============================================

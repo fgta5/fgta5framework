@@ -1175,6 +1175,9 @@ ALTER TABLE "core"."setting"
   ADD COLUMN IF NOT EXISTS "setting_value" TEXT;
 ALTER TABLE "core"."setting"
   ADD COLUMN IF NOT EXISTS "setting_descr" TEXT;
+ALTER TABLE "core"."setting"
+  ADD COLUMN IF NOT EXISTS "isdisabled" BOOLEAN DEFAULT false NOT NULL;
+
 -- WARNING: "_createby" is NOT NULL without DEFAULT.
 -- Adding as NULL first; you must backfill before setting NOT NULL.
 ALTER TABLE "core"."setting"

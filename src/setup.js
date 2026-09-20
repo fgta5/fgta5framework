@@ -199,10 +199,10 @@ async function runSetup() {
 		const servicePort = servicePortInput.trim() || defaultServicePort;
 
 		// Tanya default username & password
-		const defaultUserInput = await askQuestion(`Masukkan default username [admin]: `);
+		const defaultUserInput = await askQuestion(`Masukkan default username Applikasi [admin]: `);
 		const defaultUser = defaultUserInput.trim() || 'admin';
 
-		const defaultPassInput = await askPassword(`Masukkan default password [admin]: `);
+		const defaultPassInput = await askPassword(`Masukkan default password Applikasi [admin]: `);
 		const defaultPass = defaultPassInput || 'admin';
 
 		// Loop input database sampai koneksi berhasil
@@ -213,8 +213,8 @@ async function runSetup() {
 			console.log('\n🔑 \x1b[36mKonfigurasi Database PostgreSQL\x1b[0m');
 			const hostInput = await askQuestion(`   Host [${dbConfig.host}]: `);
 			const portInput = await askQuestion(`   Port [${dbConfig.port}]: `);
-			const userInput = await askQuestion(`   User [${dbConfig.user}]: `);
-			const passwordInput = await askPassword(`   Password: `);
+			const userInput = await askQuestion(`   Database User [${dbConfig.user}]: `);
+			const passwordInput = await askPassword(`   Database Password: `);
 
 			dbConfig.host = hostInput.trim() || dbConfig.host;
 			dbConfig.port = portInput.trim() ? parseInt(portInput.trim(), 10) : dbConfig.port;
@@ -331,6 +331,55 @@ async function runSetup() {
 			console.warn('⚠️ Gagal mengupdate login.html:', e.message);
 		}
 
+		// Membuat direktori public/local dan copy default asset jika belum ada
+		try {
+			console.log('✍️  Memeriksa direktori public/local...');
+			const localDir = path.join(rootDir, 'public', 'local');
+			await fs.mkdir(localDir, { recursive: true });
+
+			const filesToCopy = [
+				{ src: path.join(rootDir, 'public', 'images', 'logo-32x32.svg'), dest: path.join(localDir, 'logo-32x32.svg') },
+				{ src: path.join(rootDir, 'public', 'css', 'application.css'), dest: path.join(localDir, 'application.css') }
+			];
+
+			for (const file of filesToCopy) {
+				try {
+					await fs.access(file.dest);
+				} catch {
+					// File tujuan belum ada, lakukan copy
+					await fs.copyFile(file.src, file.dest);
+					console.log(`✅ Berhasil menyalin ${path.basename(file.src)} ke public/local/`);
+				}
+			}
+			console.log('✅ Direktori public/local siap digunakan.');
+		} catch (e) {
+			console.warn('⚠️ Gagal menyiapkan public/local:', e.message);
+		}
+
+		// Update direktori dan appname pada semua file *.gen.json di direktori generator
+		try {
+			console.log('✍️  Mengupdate file *.gen.json di direktori generator...');
+			const generatorDir = path.join(rootDir, 'generator');
+			const genDirEntries = await fs.readdir(generatorDir, { withFileTypes: true });
+
+			for (const entry of genDirEntries) {
+				if (entry.isFile() && entry.name.endsWith('.gen.json')) {
+					const genFilePath = path.join(generatorDir, entry.name);
+					const content = await fs.readFile(genFilePath, 'utf-8');
+					const genJson = JSON.parse(content);
+
+					genJson.appname = projectName;
+					genJson.directory = rootDir;
+
+					// Format indentasi: jika file aslinya multiline rapi / ada tab, tulis rapi
+					await fs.writeFile(genFilePath, JSON.stringify(genJson, null, '\t'), 'utf-8');
+					console.log(`✅ File generator/${entry.name} berhasil diupdate.`);
+				}
+			}
+		} catch (e) {
+			console.warn('⚠️ Gagal mengupdate file di direktori generator:', e.message);
+		}
+
 		// Pastikan Database target ada
 		await createDatabaseIfNotExists(dbConfig, dbname);
 
@@ -380,8 +429,12 @@ async function runSetup() {
 			try {
 				await fs.chmod(path.join(rootDir, 'run'), 0o755);
 				console.log('✅ File run berhasil diubah menjadi executable.');
+
+				await fs.chmod(path.join(rootDir, 'build'), 0o755);
+				console.log('✅ File run berhasil diubah menjadi executable.');
+
 			} catch (e) {
-				console.warn('⚠️ Gagal mengubah permission file run:', e.message);
+				console.warn('⚠️ Gagal mengubah permission file:', e.message);
 			}
 		}
 

@@ -88,10 +88,6 @@ comment on column core."interface"._modifydate is 'waktu terakhir record dimodif
 
 
 
--- =============================================
--- FOREIGN KEY CONSTRAINT
--- =============================================
--- Add Foreign Key Constraint  	
 
 
 -- =============================================
